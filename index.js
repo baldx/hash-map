@@ -42,22 +42,27 @@ function hash(key) {
 let hashMap = new HashMap();
 
 
+
 function set(key, value) {
     let hashedKey = hash(key);
     const length = 16;
     const index = hashedKey % length;
     let current = hashMap.capacity[index];
+    const newValue = new node(value);
 
     if (current.head === null) {
-        const newValue = new node(value);
-        current.head = newValue.value
+        current.head = newValue
+    } else {
+        while (current.head.next !== null) {
+            current.head = current.head.next
+        }
+        current.head.next = newValue;
     }
-
     return current
 }
 
-console.log(set("asd", "adsd"));
-console.log(hashMap);
+// console.log(set("asd", "adsd")); sets head to the node
+// console.log(set("asd", "adsd")); sets node to tail
 
 /*
     function set() {
