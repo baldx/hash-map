@@ -22,9 +22,10 @@ class LinkedList {
 }
 
 class node {
-    constructor(value, next = null) {
+    constructor(value, key, next = null) {
         this.value = value;
         this.next = next;
+        this.key = key;
     }
 }
 
@@ -48,7 +49,14 @@ function set(key, value) {
     const length = 16;
     const index = hashedKey % length;
     let current = hashMap.capacity[index];
-    const newValue = new node(value);
+    const newValue = new node(value, hashedKey);
+
+    while (current.head !== null) {
+        if (current.head.key === hashedKey) {
+            current.head.value = value;
+        }
+        current.head = current.head.next;
+    }
 
     if (current.head === null) {
         current.head = newValue
