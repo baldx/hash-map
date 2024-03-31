@@ -43,6 +43,11 @@ function hash(key) {
 let hashMap = new HashMap();
 
 
+function checkIndex (index) {
+    if (index < 0 || index >= hashMap.capacity.length) {
+        throw new Error("Trying to access index out of bound");
+    }
+}
 
 function set(key, value) {
     let hashedKey = hash(key);
@@ -50,6 +55,8 @@ function set(key, value) {
     const index = hashedKey % length;
     let current = hashMap.capacity[index];
     const newValue = new node(value, hashedKey);
+
+    checkIndex(index)
 
     while (current.head !== null) {
         if (current.head.key === hashedKey) {
@@ -75,6 +82,8 @@ function get(key) {
     const index = hashedKey % length;
     let current = hashMap.capacity[index];
     
+    checkIndex(index)
+
     if (current.head === null) {
         return null;
     } else {
@@ -95,6 +104,8 @@ function has(key) {
     const index = hashedKey % length;
     let current = hashMap.capacity[index];
     
+    checkIndex(index)
+
     if (current.head === null) {
         return false;
     } else {
@@ -108,3 +119,4 @@ function has(key) {
 
     return false
 }
+
