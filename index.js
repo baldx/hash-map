@@ -140,6 +140,50 @@ function remove(key) {
     return current
 }
 
-set("ahmad", "test")
-console.log(remove("ahmad"));
-console.log(has("ahmad"));
+function length() {
+    let totalKeys = 0;
+    let length = hashMap.capacity.length - 1;
+    let list = hashMap.capacity;
+
+    while (length > 0) {
+        if (list[length].head === null) {
+            totalKeys = totalKeys
+        } else {
+            while (list[length].head !== null) {
+                if (list[length].head.key) {
+                    totalKeys++;
+                }
+                list[length].head = list[length].head.next; //fix with collisions later
+            }
+        }
+        length--;
+    }
+
+    return totalKeys
+}
+
+// set("ahmad", "dasds")
+// set("jd", "dka")
+// set("ldla", "ald")
+// set("ldddla", "alddd")
+
+// console.log(hashMap.capacity[13]);
+// console.log(length());
+
+// while (list[length].head.next !== null) {
+//     totalKeys++;
+// }
+// list[length].head = list[length].head.next
+
+
+/*
+    Pseudo code for length
+
+    while length is within range of array of buckets
+        iterate through every bucket
+            if theres no key in bucket return totalKeys
+            if theres a key in the bucket increment totalKeys
+            else return
+
+    format for hashmap linked list: LinkedList { head: node { value: 'dasds', next: null, key: 92787657 }
+*/
