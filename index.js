@@ -88,3 +88,23 @@ function get(key) {
 
     return current.head
 }
+
+function has(key) {
+    let hashedKey = hash(key);
+    const length = 16;
+    const index = hashedKey % length;
+    let current = hashMap.capacity[index];
+    
+    if (current.head === null) {
+        return false;
+    } else {
+        while (current.head !== null) {
+            if (current.head.key === hashedKey) {
+                return true
+            }
+            current.head = current.head.next;
+        }
+    }
+
+    return false
+}
