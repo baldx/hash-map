@@ -166,3 +166,24 @@ function clear() {
     return new HashMap();
 }
 
+function keys() {
+    let keys = []
+    let length = hashMap.capacity.length - 1;
+    let list = hashMap.capacity;
+
+    while (length > 0) {
+        if (list[length].head === null) {
+            keys.push()
+        } else {
+            while (list[length].head !== null) {
+                if (list[length].head.key) {
+                    keys.push(list[length].head.key)
+                }
+                list[length].head = list[length].head.next; //deal with collisions
+            }
+        }
+        length--;
+    }
+
+    return keys
+}
