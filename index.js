@@ -162,28 +162,7 @@ function length() {
     return totalKeys
 }
 
-// set("ahmad", "dasds")
-// set("jd", "dka")
-// set("ldla", "ald")
-// set("ldddla", "alddd")
+function clear() {
+    return new HashMap();
+}
 
-// console.log(hashMap.capacity[13]);
-// console.log(length());
-
-// while (list[length].head.next !== null) {
-//     totalKeys++;
-// }
-// list[length].head = list[length].head.next
-
-
-/*
-    Pseudo code for length
-
-    while length is within range of array of buckets
-        iterate through every bucket
-            if theres no key in bucket return totalKeys
-            if theres a key in the bucket increment totalKeys
-            else return
-
-    format for hashmap linked list: LinkedList { head: node { value: 'dasds', next: null, key: 92787657 }
-*/
