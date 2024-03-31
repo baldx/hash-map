@@ -1,5 +1,5 @@
 class HashMap {
-    constructor(loadFactor) {
+    constructor(loadFactor = 0) {
 
         function initialCapacity () {
             let buckets = [];
@@ -49,6 +49,18 @@ function checkIndex (index) {
     }
 }
 
+function editLoadFactor (action) {
+    switch (action) {
+        case 'increase':
+            hashMap.loadFactor = hashMap.loadFactor + 1/16
+            break;
+    
+        case 'decrease':
+            hashMap.loadFactor = hashMap.loadFactor - 1/16
+            break;
+    }
+}
+
 function set(key, value) {
     let hashedKey = hash(key);
     const length = 16;
@@ -67,14 +79,19 @@ function set(key, value) {
 
     if (current.head === null) {
         current.head = newValue
+        editLoadFactor('increase')
     } else {
         while (current.head.next !== null) {
             current.head = current.head.next
         }
+        editLoadFactor('increase')
         current.head.next = newValue;
     }
     return current
 }
+
+set("ahmad", "ahmad")
+console.log(hashMap);
 
 function get(key) {
     let hashedKey = hash(key);
@@ -134,6 +151,7 @@ function remove(key) {
             if (current.head.key === hashedKey) {
                 return current.head = null;
             }
+            editLoadFactor('decrease');
             current.head = current.head.next;
         }
     }
