@@ -116,7 +116,30 @@ function has(key) {
             current.head = current.head.next;
         }
     }
-
     return false
 }
 
+function remove(key) {
+    let hashedKey = hash(key);
+    const length = 16;
+    const index = hashedKey % length;
+    let current = hashMap.capacity[index];
+
+    checkIndex(index)
+
+    if (current.head === null) {
+        return null;
+    } else {
+        while (current.head !== null) {
+            if (current.head.key === hashedKey) {
+                return current.head = null;
+            }
+            current.head = current.head.next;
+        }
+    }
+    return current
+}
+
+set("ahmad", "test")
+console.log(remove("ahmad"));
+console.log(has("ahmad"));
