@@ -69,22 +69,22 @@ function set(key, value) {
     return current
 }
 
-// console.log(set("asd", "adsd")); sets head to the node
-// console.log(set("asd", "adsd")); sets node to tail
-
-/*
-    function set() {
-        if list head is null {
-            set value to head
-            set head.next to null
-        }
-            
-        else {
-            while next node is not null {
-                set current node to next node
+function get(key) {
+    let hashedKey = hash(key);
+    const length = 16;
+    const index = hashedKey % length;
+    let current = hashMap.capacity[index];
+    
+    if (current.head === null) {
+        return null;
+    } else {
+        while (current.head !== null) {
+            if (current.head.key === hashedKey) {
+                return current.head.value
             }
-            set next node to value
+            current.head = current.head.next;
         }
-
     }
-*/
+
+    return current.head
+}
