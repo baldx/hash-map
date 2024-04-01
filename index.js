@@ -65,33 +65,37 @@ function set(key, value) {
     let hashedKey = hash(key);
     const length = 16;
     const index = hashedKey % length;
-    let current = hashMap.capacity[index];
-    const newValue = new node(value, hashedKey);
+    let current = hashMap.capacity[index]; // this +
+    const newValue = new node(value, hashedKey); // this have to be configured since the keys and hashed key are the same
 
     checkIndex(index)
 
-    while (current.head !== null) {
-        if (current.head.key === hashedKey) {
-            current.head.value = value;
-        }
-        current.head = current.head.next;
-    }
+    
 
     if (current.head === null) {
         current.head = newValue
         editLoadFactor('increase')
     } else {
-        while (current.head.next !== null) {
-            current.head = current.head.next
+        if (current.head !== null) {
+            while (current.head.next !== null) {
+                current.head = current.head.next
+            }
+            if (current.head.key === hashedKey) {
+                return current.head.value = value;
+            }
         }
-        editLoadFactor('increase')
         current.head.next = newValue;
     }
     return current
 }
 
-set("ahmad", "ahmad")
-console.log(hashMap);
+
+set("ldla", "test1")
+set("ldddla", "test1")
+set("ldla", "test3")
+set("ldddla", "test2")
+
+console.log(hashMap.capacity[13]);
 
 function get(key) {
     let hashedKey = hash(key);
