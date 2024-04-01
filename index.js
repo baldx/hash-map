@@ -49,53 +49,70 @@ function checkIndex (index) {
     }
 }
 
-function editLoadFactor (action) {
-    switch (action) {
-        case 'increase':
-            hashMap.loadFactor = hashMap.loadFactor + 1/16
-            break;
-    
-        case 'decrease':
-            hashMap.loadFactor = hashMap.loadFactor - 1/16
-            break;
+
+function editLoadFactor () {
+    hashMap.loadFactor += 1 / hashMap.capacity.length;
+
+    function increaseCapacity () {
+        let currentBuckets = [...hashMap.capacity]
+
+        for (let i = 0; i < hashMap.capacity.length; i++) {
+            let list = new LinkedList();
+            currentBuckets.push(list)
+        }
+
+        return currentBuckets
+    }
+
+    if (hashMap.loadFactor >= 0.75) {
+        console.log("Load factor sequence initiated");
+        hashMap.capacity = increaseCapacity()
+        hashMap.loadFactor = length() / hashMap.capacity.length; //fix this line, length() renders all nodes to null
+        console.log(hashMap);
     }
 }
+
+
+
 
 function set(key, value) {
     let hashedKey = hash(key);
     const length = 16;
     const index = hashedKey % length;
-    let current = hashMap.capacity[index]; // this +
-    const newValue = new node(value, hashedKey); // this have to be configured since the keys and hashed key are the same
+    let current = hashMap.capacity[index]; 
+    const newValue = new node(value, hashedKey);
 
     checkIndex(index)
 
-    
-
     if (current.head === null) {
         current.head = newValue
-        editLoadFactor('increase')
     } else {
-        if (current.head !== null) {
-            while (current.head.next !== null) {
-                current.head = current.head.next
-            }
-            if (current.head.key === hashedKey) {
-                return current.head.value = value;
-            }
+        while (current.head.next !== null) {
+            current.head = current.head.next
+        }
+        if (current.head.key === hashedKey) {
+            return current.head.value = value;
         }
         current.head.next = newValue;
     }
-    return current
+
+    editLoadFactor()
 }
 
+set("ahmad", "asdsad")
+set("äölad", "asdsad")
+set("äökfg", "asdsad")
+set("sfq", "asdsad")
+set("fsdf", "asdsad")
+set("mbnm", "asdsad")
+set("ad", "asdsad")
+set("aasdd", "asdsad")
+set("klähf", "asdsad")
+set("yor", "asdsad")
+set("czxc", "asdsad")
+set("ioputr", "adasdsa")
 
-set("ldla", "test1")
-set("ldddla", "test1")
-set("ldla", "test3")
-set("ldddla", "test2")
 
-console.log(hashMap.capacity[13]);
 
 function get(key) {
     let hashedKey = hash(key);
