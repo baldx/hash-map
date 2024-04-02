@@ -178,22 +178,19 @@ function clear() {
 }
 
 function keys() {
-    let keys = []
-    let length = hashMap.capacity.length - 1;
-    let list = hashMap.capacity;
-
-    while (length > 0) {
-        if (list[length].head === null) {
-            keys.push()
-        } else {
-            while (list[length].head !== null) {
-                if (list[length].head.key) {
-                    keys.push(list[length].head.key)
-                }
-                list[length].head = list[length].head.next; //deal with collisions
-            }
+    let totalKeys = [];
+    for (let i = 0; i < hashMap.capacity.length; i++) {
+        let current = hashMap.capacity[i].head;
+        while (current !== null) {
+            totalKeys.push(current.key)
+            current = current.next
         }
-        length--;
     }
-    return keys
+    return totalKeys
 }
+
+set("ahmad", "ahmad")
+set("asdsad", "kd")
+set("xsa", "adasd")
+
+console.log(keys());
