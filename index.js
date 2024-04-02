@@ -66,14 +66,10 @@ function editLoadFactor () {
 
     if (hashMap.loadFactor >= 0.75) {
         console.log("Load factor sequence initiated");
+        hashMap.loadFactor = length() / hashMap.capacity.length
         hashMap.capacity = increaseCapacity()
-        hashMap.loadFactor = length() / hashMap.capacity.length; //fix this line, length() renders all nodes to null
-        console.log(hashMap);
     }
 }
-
-
-
 
 function set(key, value) {
     let hashedKey = hash(key);
@@ -91,28 +87,14 @@ function set(key, value) {
             current.head = current.head.next
         }
         if (current.head.key === hashedKey) {
+            
             return current.head.value = value;
         }
         current.head.next = newValue;
     }
-
     editLoadFactor()
+
 }
-
-set("ahmad", "asdsad")
-set("äölad", "asdsad")
-set("äökfg", "asdsad")
-set("sfq", "asdsad")
-set("fsdf", "asdsad")
-set("mbnm", "asdsad")
-set("ad", "asdsad")
-set("aasdd", "asdsad")
-set("klähf", "asdsad")
-set("yor", "asdsad")
-set("czxc", "asdsad")
-set("ioputr", "adasdsa")
-
-
 
 function get(key) {
     let hashedKey = hash(key);
@@ -181,23 +163,13 @@ function remove(key) {
 
 function length() {
     let totalKeys = 0;
-    let length = hashMap.capacity.length - 1;
-    let list = hashMap.capacity;
-
-    while (length > 0) {
-        if (list[length].head === null) {
-            totalKeys = totalKeys
-        } else {
-            while (list[length].head !== null) {
-                if (list[length].head.key) {
-                    totalKeys++;
-                }
-                list[length].head = list[length].head.next; //fix with collisions later
-            }
+    for (let i = 0; i < hashMap.capacity.length; i++) {
+        let current = hashMap.capacity[i].head;
+        while (current !== null) {
+            totalKeys++;
+            current = current.next
         }
-        length--;
     }
-
     return totalKeys
 }
 
@@ -223,6 +195,5 @@ function keys() {
         }
         length--;
     }
-
     return keys
 }
