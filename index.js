@@ -201,8 +201,20 @@ function values() {
     return totalValues
 }
 
+function entries() {
+    let totalEntries = [];
+    for (let i = 0; i < hashMap.capacity.length; i++) {
+        let current = hashMap.capacity[i].head;
+        while (current !== null) {
+            totalEntries.push([current.key, current.value])
+            current = current.next
+        }
+    }
+    return totalEntries
+}
+
 set("ahmad", "ahmad")
 set("asdsad", "kd")
 set("xsa", "adasd")
 
-console.log(values());
+console.log(entries());
